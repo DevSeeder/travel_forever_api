@@ -30,6 +30,9 @@ export class Expense extends AbstractSchema {
   refundable: boolean;
 
   @Prop({ required: false })
+  refundableValue: number;
+
+  @Prop({ required: false })
   link: string;
 
   @Prop({ required: false })

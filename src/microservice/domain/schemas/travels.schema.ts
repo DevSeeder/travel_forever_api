@@ -14,7 +14,7 @@ export class Travel extends AbstractSchema {
   @Prop({ required: false })
   description: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   startDate: Date;
 
   @Prop({ required: false })
@@ -22,13 +22,17 @@ export class Travel extends AbstractSchema {
 
   @Prop({ required: true, type: Object })
   places: TravelPlace[];
+
+  @Prop({ required: true })
+  userId: string;
 }
 
 export interface TravelPlace {
   _id: string;
+  name: string;
   type: string;
   sequence: number;
-  date: Date;
+  arriveDate: Date;
 }
 
 const schema = SchemaFactory.createForClass(Travel);
