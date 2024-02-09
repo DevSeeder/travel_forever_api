@@ -10,6 +10,7 @@ import {
   GenericModuleGenerator
 } from '@devseeder/nestjs-microservices-commons';
 import { MetaDataInterceptor } from '@devseeder/nestjs-microservices-core';
+import { DIToken, PROJECT_KEY } from '../app.constants';
 
 const moduleOptions = {
   authGuard: CustomJwtAuthGuard,
@@ -40,6 +41,10 @@ const moduleOptions = {
     {
       provide: APP_INTERCEPTOR,
       useClass: MetaDataInterceptor
+    },
+    {
+      provide: DIToken.PROJECT_KEY,
+      useValue: PROJECT_KEY
     }
   ],
   exports: []
