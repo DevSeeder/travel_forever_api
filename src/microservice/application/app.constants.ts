@@ -8,6 +8,7 @@ export enum DependencyEntityTokens {
   ACTIVITY = 'activities',
   STEP = 'steps',
   TRANSPORT_MODE = 'transportModes',
+  CURRENCY = 'currencies',
   USER = 'users'
 }
 

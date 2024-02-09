@@ -17,8 +17,11 @@ export class Expense extends AbstractSchema {
   @Prop({ required: true })
   categoryId: string;
 
-  @Prop({ required: false })
+  @Prop({ required: true })
   cost: number;
+
+  @Prop({ required: false })
+  currency: string;
 
   @Prop({ required: false })
   payedValue: number;

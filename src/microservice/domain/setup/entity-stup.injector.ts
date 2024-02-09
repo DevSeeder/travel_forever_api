@@ -19,6 +19,7 @@ import {
   TransportMode,
   TransportModesSchema
 } from '../schemas/transport-modes.schema';
+import { Currency, CurrencysSchema } from '../schemas/currencies.schema';
 
 export const EntitySetupConfig: ModelEntityTokens = {
   transportModes: {
@@ -40,6 +41,11 @@ export const EntitySetupConfig: ModelEntityTokens = {
     modelName: Expense.name,
     schema: ExpensesSchema,
     collection: DependencyEntityTokens.EXPENSE
+  },
+  currencies: {
+    modelName: Currency.name,
+    schema: CurrencysSchema,
+    collection: DependencyEntityTokens.CURRENCY
   },
   steps: {
     modelName: Step.name,
