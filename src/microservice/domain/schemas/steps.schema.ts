@@ -28,6 +28,15 @@ export class Step extends AbstractSchema {
 
   @Prop({ required: false })
   transportMode: string;
+
+  @Prop({ required: false })
+  files: string[];
+
+  @Prop({ required: false })
+  link: string;
+
+  @Prop({ required: false })
+  company: string;
 }
 
 const schema = SchemaFactory.createForClass(Step);

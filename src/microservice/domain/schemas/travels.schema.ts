@@ -31,8 +31,9 @@ export interface TravelPlace {
   _id: string;
   name: string;
   type: string;
-  sequence: number;
   arriveDate: Date;
+  destinyPlace?: boolean;
+  mainTravelPlace?: boolean;
 }
 
 const schema = SchemaFactory.createForClass(Travel);

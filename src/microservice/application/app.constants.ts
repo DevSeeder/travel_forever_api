@@ -4,6 +4,7 @@ export enum DependencyEntityTokens {
   TRAVEL = 'travels',
   EXPENSE_CATEGORY = 'expenseCategories',
   STEP_CATEGORY = 'stepCategories',
+  ACTIVITY_CATEGORY = 'activityCategories',
   EXPENSE = 'expenses',
   ACTIVITY = 'activities',
   STEP = 'steps',

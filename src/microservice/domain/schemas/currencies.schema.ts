@@ -13,7 +13,7 @@ export class Currency extends AbstractDomain {
   @Prop({ required: true })
   code: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   symbol: string;
 
   @Prop({ required: false })

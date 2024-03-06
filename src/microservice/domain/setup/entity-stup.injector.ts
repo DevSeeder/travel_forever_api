@@ -20,12 +20,21 @@ import {
   TransportModesSchema
 } from '../schemas/transport-modes.schema';
 import { Currency, CurrencysSchema } from '../schemas/currencies.schema';
+import {
+  ActivityCategoriesSchema,
+  ActivityCategory
+} from '../schemas/activity-categories.schema';
 
 export const EntitySetupConfig: ModelEntityTokens = {
   transportModes: {
     modelName: TransportMode.name,
     schema: TransportModesSchema,
     collection: DependencyEntityTokens.TRANSPORT_MODE
+  },
+  activityCategories: {
+    modelName: ActivityCategory.name,
+    schema: ActivityCategoriesSchema,
+    collection: DependencyEntityTokens.ACTIVITY_CATEGORY
   },
   stepCategories: {
     modelName: StepCategory.name,

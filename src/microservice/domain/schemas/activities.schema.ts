@@ -15,6 +15,9 @@ export class Activity extends AbstractSchema {
   description: string;
 
   @Prop({ required: true })
+  categoryId: string;
+
+  @Prop({ required: true })
   startDate: Date;
 
   @Prop({ required: false })
@@ -22,12 +25,6 @@ export class Activity extends AbstractSchema {
 
   @Prop({ required: true })
   travelId: string;
-
-  @Prop({ required: false })
-  link: string;
-
-  @Prop({ required: false })
-  company: string;
 }
 
 const schema = SchemaFactory.createForClass(Activity);

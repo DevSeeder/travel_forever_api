@@ -29,6 +29,9 @@ export class Expense extends AbstractSchema {
   @Prop({ required: false })
   date: Date;
 
+  @Prop({ required: false })
+  paymentDate: Date;
+
   @Prop({ required: false, default: false })
   refundable: boolean;
 
@@ -40,6 +43,9 @@ export class Expense extends AbstractSchema {
 
   @Prop({ required: false })
   company: string;
+
+  @Prop({ required: false })
+  files: string[];
 
   @Prop({ required: false })
   stepId: string;
