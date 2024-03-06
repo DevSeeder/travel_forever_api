@@ -2,7 +2,7 @@ auth:
   jwt:
     expires: '90000s'
     secret: ${GLOBAL_API_JWT_SECRET}
-  url: http://localhost:5000
+  url: auth.devseeder.com
   clientToken: ${PETHELPER_API_AUTH_TOKEN}
   scopeKey: DEVSEEDER/TRAVEL_FOREVER/API
 database:
