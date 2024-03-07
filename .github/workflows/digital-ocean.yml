@@ -14,10 +14,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # Configuração do EnvKey utilizando o envkey-action
-      - name: Load Environment Variables from EnvKey
-        uses: envkey/envkey-action@v1
-        with:
-          envkey: ${{ secrets.ENVKEY }}
+      - name: Configure Environment
+        env:
+          ENVKEY: ${{ secrets.ENVKEY }}
+        uses: rojopolis/envkey-action@master
 
       - name: Set up SSH
         run: |
