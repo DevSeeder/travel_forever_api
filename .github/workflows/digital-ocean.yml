@@ -24,8 +24,8 @@ jobs:
         env:
           ENVKEY: ${{ secrets.ENV_KEY }}
         run: |
-          echo $ENVKEY
-          echo ${{ secrets.ENV_KEY }}
+          echo "$ENVKEY"
+          echo "${{ secrets.ENV_KEY }}""
           envkey-source
 
       - name: Set up SSH
