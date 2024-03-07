@@ -12,25 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # Configuração do EnvKey utilizando o envkey-action
 
-      - name: Curl Env Key
-        run: curl https://env.envkey.com/health
+      # Instalação do cliente EnvKey (ajuste conforme necessário)
+      - name: Install EnvKey
+        run: |
+          curl -s https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
+          export PATH="$PATH:$HOME/.envkey/bin"
 
-      - name: Configure Environment
+      # Configuração do EnvKey
+      - name: Configure EnvKey
         env:
-          ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
-        uses: rojopolis/envkey-action@master
+          ENVKEY: 3CVJAeM9qAtbbMRo2HoP5S-34mYCsBZSXWBpmctBWK8sY
+        run: |
+          echo $ENVKEY
+          echo ${{ secrets.ENV_KEY }}
+          envkey-source
 
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" | base64 --decode > private_key.pem
+
+          echo "$SSH_PRIVATE_KEY"  | base64 --decode > private_key.pem
           chmod 600 private_key.pem
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
         env:
+          TARGET_DIR: ${{ env.TRAVELFOREVER_API_SERVER_DIR }}
           SSH_HOST: ${{ env.TRAVELFOREVER_API_SERVER_IP }}
           SSH_PRIVATE_KEY: ${{ env.TRAVELFOREVER_SERVER_SSH }}
+          SSH_USERNAME: ${{ env.GLOBAL_SERVER_USER }}
 
       - name: Execute SSH Command
         run: |
