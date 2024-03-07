@@ -16,9 +16,6 @@ jobs:
       - name: Ping env
         run: curl https://env.envkey.com/health
 
-      - name: Show environment
-        run: env
-
       # Configuração do EnvKey utilizando o envkey-action
       - name: Configure Environment
         env:
