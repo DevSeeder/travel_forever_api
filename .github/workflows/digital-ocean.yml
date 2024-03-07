@@ -21,7 +21,7 @@ jobs:
 
       # Configuração do EnvKey
       - name: Configure EnvKey
-        run: eval $(envkey-source)
+        run: envkey-source
         env:
           ENVKEY: ${{ secrets.ENV_KEY }}
 
