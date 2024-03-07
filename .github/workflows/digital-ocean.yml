@@ -12,18 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # Configuração do EnvKey utilizando o envkey-action
 
-      - name: Ping env
+      - name: Curl Env Key
         run: curl https://env.envkey.com/health
 
-      # Configuração do EnvKey utilizando o envkey-action
       - name: Configure Environment
         env:
           ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
         uses: rojopolis/envkey-action@master
         run:
-      - name: Show environment
-        run: env
 
       - name: Set up SSH
         run: |
