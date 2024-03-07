@@ -1,0 +1,70 @@
+name: Push-to-EC2
+
+# Trigger deployment only on push to main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on main branch push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Instalação do cliente EnvKey (ajuste conforme necessário)
+      - name: Install EnvKey
+        run: |
+          curl -s https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
+          export PATH="$PATH:$HOME/.envkey/bin"
+
+      # Configuração do EnvKey
+      - name: Configure EnvKey
+        run: envkey-source
+        env:
+          ENVKEY: ${{ secrets.ENV_KEY }}
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+
+          echo "$SSH_PRIVATE_KEY"  | base64 --decode > private_key.pem
+          chmod 600 private_key.pem
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+        env:
+          TARGET_DIR: ${{ env.TRAVELFOREVER_API_SERVER_DIR }}
+          SSH_HOST: ${{ env.TRAVELFOREVER_API_SERVER_IP }}
+          SSH_PRIVATE_KEY: ${{ env.TRAVELFOREVER_SERVER_SSH }}
+          SSH_USERNAME: ${{ env.GLOBAL_SERVER_USER }}
+
+      - name: Execute SSH Command
+        run: |
+          eval "$(ssh-agent -s)"
+          set -x  # Ativa o modo de depuração
+          ssh-add private_key.pem
+          ssh -i $SSH_USERNAME@$SSH_HOST "
+
+            cd /var/www/instances/$TARGET_DIR;
+
+            sudo git checkout .;
+            sudo git checkout main;
+            sudo git pull;
+
+            # Lê o .env.sample e adiciona ao .env
+            if [ -f .env ]; then
+              rm .env
+              echo "Arquivo .env apagado com sucesso!"
+            fi
+            echo "ENVKEY=${{ secrets.ENV_KEY }}" > .env
+
+            sudo npm install;
+            sudo npm run build;
+            
+            pm2 restart $TARGET_DIR;
+            pm2 save;
+          "
+        env:
+          TARGET_DIR: ${{ env.TRAVELFOREVER_API_SERVER_DIR }}
+          SSH_HOST: ${{ env.TRAVELFOREVER_API_SERVER_IP }}
+          SSH_USERNAME: ${{ env.GLOBAL_SERVER_USER }}
