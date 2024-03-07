@@ -6,10 +6,14 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CustomJwtAuthGuard } from 'src/core/custom-jwt-auth.guard';
 import { EntitySetupConfig } from 'src/microservice/domain/setup/entity-stup.injector';
 import {
+  AuthHttpModule,
   GeneratorModuleOptions,
   GenericModuleGenerator
 } from '@devseeder/nestjs-microservices-commons';
-import { MetaDataInterceptor } from '@devseeder/nestjs-microservices-core';
+import {
+  ClientAuthService,
+  MetaDataInterceptor
+} from '@devseeder/nestjs-microservices-core';
 import { DIToken, PROJECT_KEY } from '../app.constants';
 
 const moduleOptions = {
@@ -34,7 +38,8 @@ const moduleOptions = {
     }),
     ...GenericModuleGenerator.generateModules(
       moduleOptions as GeneratorModuleOptions
-    )
+    ),
+    AuthHttpModule
   ],
   controllers: [],
   providers: [
