@@ -1,4 +1,4 @@
-export const PROJECT_KEY = 'PET_HELPER';
+export const PROJECT_KEY = 'TRAVEL_FOREVER';
 
 export enum DependencyEntityTokens {
   TRAVEL = 'travels',

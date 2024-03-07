@@ -12,7 +12,7 @@ api:
   port: ${TRAVELFOREVER_API_SERVER_PORT}
 doc:
   version: 0.0.1
-  name: 'Pet Helper API'
+  name: 'Travel Forever API'
   projectKey: 'TRAVEL_FOREVER'
 schemas:
   database:
