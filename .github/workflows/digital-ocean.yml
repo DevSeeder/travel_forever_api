@@ -22,10 +22,10 @@ jobs:
       # Configuração do EnvKey
       - name: Configure EnvKey
         env:
-          ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
+          ENVKEY: ${{ secrets.ENVKEY }}
         run: |
           echo $ENVKEY
-          echo ${{ secrets.ENV_KEY }}
+          echo ${{ secrets.ENVKEY }}
           envkey-source
 
       - name: Set up SSH
