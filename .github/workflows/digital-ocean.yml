@@ -16,8 +16,10 @@ jobs:
       # Configuração do EnvKey utilizando o envkey-action
       - name: Configure Environment
         env:
-          ENVKEY: ${{ secrets.ENVKEY }}
+          ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
         uses: rojopolis/envkey-action@master
+      - name: Show environment
+        run: env
 
       - name: Set up SSH
         run: |
