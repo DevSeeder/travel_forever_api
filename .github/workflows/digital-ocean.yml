@@ -1,4 +1,4 @@
-name: Push-to-EC2
+name: Deploy-to-Server
 
 # Trigger deployment only on push to main branch
 on:
@@ -22,10 +22,10 @@ jobs:
       # Configuração do EnvKey
       - name: Configure EnvKey
         env:
-          ENVKEY: ${{ secrets.ENV_KEY }}
+          ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
         run: |
-          echo "$ENVKEY"
-          echo "${{ secrets.ENV_KEY }}""
+          echo $ENVKEY
+          echo ${{ secrets.ENV_KEY }}
           envkey-source
 
       - name: Set up SSH
