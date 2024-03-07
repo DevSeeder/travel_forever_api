@@ -21,7 +21,6 @@ jobs:
         env:
           ENVKEY: ek27MQCwy8EiSXf4vZWZT3ks-3CGtf6jCE76urJfrrC2LH2
         uses: rojopolis/envkey-action@master
-        run:
 
       - name: Set up SSH
         run: |
