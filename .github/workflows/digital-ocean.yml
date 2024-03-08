@@ -13,40 +13,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Instalar EnvKey CLI
-        run: |
-          curl -sL https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
-          echo "EnvKey CLI instalado com sucesso."
-
-      - name: Configurar EnvKey CLI e Carregar Variáveis
-        env:
-          ENVKEY: ${{ secrets.ENV_CLI_KEY }}
-        run: |
-          envkey-source > .env
-          cat .env
-          echo "Variáveis do EnvKey carregadas e salvas em .env.
-
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
 
-          echo "$SSH_PRIVATE_KEY"  | base64 --decode > private_key.pem
+          echo "${{ secrets.SERVER_SSH }}"  | base64 --decode > private_key.pem
           chmod 600 private_key.pem
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-        env:
-          TARGET_DIR: ${{ env.TRAVELFOREVER_API_SERVER_DIR }}
-          SSH_HOST: ${{ env.TRAVELFOREVER_API_SERVER_IP }}
-          SSH_PRIVATE_KEY: ${{ env.TRAVELFOREVER_SERVER_SSH }}
-          SSH_USERNAME: ${{ env.GLOBAL_SERVER_USER }}
+          ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
       - name: Execute SSH Command
         run: |
           eval "$(ssh-agent -s)"
           set -x  # Ativa o modo de depuração
           ssh-add private_key.pem
-          ssh -i $SSH_USERNAME@$SSH_HOST "
+          ssh -i ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
 
-            cd /var/www/instances/$TARGET_DIR;
+            cd /var/www/instances/${{ secrets.TARGET_DIR }};
 
             sudo git checkout .;
             sudo git checkout main;
@@ -57,15 +39,11 @@ jobs:
               rm .env
               echo "Arquivo .env apagado com sucesso!"
             fi
-            echo "ENVKEY=${{ secrets.ENV_KEY }}" > .env
+            echo "ENVKEY=${{ secrets.ENVKEY }}" > .env
 
             sudo npm install;
             sudo npm run build;
             
-            pm2 restart $TARGET_DIR;
+            pm2 restart ${{ secrets.TARGET_DIR }};
             pm2 save;
           "
-        env:
-          TARGET_DIR: ${{ env.TRAVELFOREVER_API_SERVER_DIR }}
-          SSH_HOST: ${{ env.TRAVELFOREVER_API_SERVER_IP }}
-          SSH_USERNAME: ${{ env.GLOBAL_SERVER_USER }}
