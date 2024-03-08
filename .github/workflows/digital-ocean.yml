@@ -17,6 +17,7 @@ jobs:
       - name: Install EnvKey
         run: |
           curl -s https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
+          echo "ENVKEY=${{ secrets.ENVKEY }}" > .env
           eval $(envkey-source)
           eval $(envkey-source ${{ secrets.ENVKEY }})
 
