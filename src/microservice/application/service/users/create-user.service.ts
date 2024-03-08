@@ -5,7 +5,7 @@ import {
 } from '@devseeder/nestjs-microservices-schemas';
 import { REQUEST } from '@nestjs/core';
 import {
-  EntitySchema,
+  EntitySchema, //
   FieldSchema
 } from '@devseeder/nestjs-microservices-schemas';
 import {

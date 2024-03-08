@@ -8,7 +8,8 @@ import { EntitySetupConfig } from 'src/microservice/domain/setup/entity-stup.inj
 import {
   AuthHttpModule,
   GeneratorModuleOptions,
-  GenericModuleGenerator
+  GenericModuleGenerator,
+  ReloadController
 } from '@devseeder/nestjs-microservices-commons';
 import {
   ClientAuthService,
@@ -41,7 +42,7 @@ const moduleOptions = {
     ),
     AuthHttpModule
   ],
-  controllers: [],
+  controllers: [ReloadController],
   providers: [
     {
       provide: APP_INTERCEPTOR,
