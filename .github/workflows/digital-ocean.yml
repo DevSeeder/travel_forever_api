@@ -17,16 +17,8 @@ jobs:
       - name: Install EnvKey
         run: |
           curl -s https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
-          export PATH="$PATH:$HOME/.envkey/bin"
-
-      # Configuração do EnvKey
-      - name: Configure EnvKey
-        env:
-          ENVKEY: 3CVJAeM9qAtbbMRo2HoP5S-34mYCsBZSXWBpmctBWK8sY
-        run: |
-          echo $ENVKEY
-          echo ${{ secrets.ENV_KEY }}
-          envkey-source
+          eval $(envkey-source)
+          eval $(envkey-source ${{ secrets.ENVKEY }})
 
       - name: Set up SSH
         run: |
