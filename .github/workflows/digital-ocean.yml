@@ -46,7 +46,6 @@ jobs:
             echo "Pacotes instalados!"
 
             echo "Gerando build..."
-            # sudo npm run build;
             echo "Build Gerado!"
 
             echo "Stopping..."
