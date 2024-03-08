@@ -40,13 +40,11 @@ jobs:
               echo "Arquivo .env apagado com sucesso!"
             fi
             echo "ENVKEY=${{ secrets.ENVKEY }}" > .env
+            echo "LAST_DEPLOY=$(date '+%Y-%m-%d %H:%M:%S')" >> .env
 
             echo "Instalando pacotes npm...";
             sudo npm install;
             echo "Pacotes instalados!";
-
-            echo "Gerando build...";
-            echo "Build Gerado!";
 
             echo "Stopping...";
             pm2 stop ${{ secrets.TARGET_DIR }};
