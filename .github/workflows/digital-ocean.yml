@@ -20,7 +20,7 @@ jobs:
 
       - name: Configurar EnvKey CLI e Carregar Variáveis
         env:
-          ENVKEY: WNdo1ZBPKCT7snEKxtZvpE-2ozaiJhAUuENH6ArhCDSMg
+          ENVKEY: ${{ secrets.ENV_CLI_KEY }}
         run: |
           envkey-source > .env
           cat .env
