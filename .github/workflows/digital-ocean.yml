@@ -41,18 +41,18 @@ jobs:
             fi
             echo "ENVKEY=${{ secrets.ENVKEY }}" > .env
 
-            echo "Instalando pacotes npm..."
+            echo "Instalando pacotes npm...";
             sudo npm install;
-            echo "Pacotes instalados!"
+            echo "Pacotes instalados!";
 
-            echo "Gerando build..."
-            echo "Build Gerado!"
+            echo "Gerando build...";
+            echo "Build Gerado!";
 
-            echo "Stopping..."
+            echo "Stopping...";
             pm2 stop ${{ secrets.TARGET_DIR }};
-            echo "Starting..."
+            echo "Starting...";
             pm2 start ${{ secrets.TARGET_DIR }};
-            echo "Saving..."
+            echo "Saving...";
             pm2 save;
-            echo "Saved!"
+            echo "Saved!";
           "
