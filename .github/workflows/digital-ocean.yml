@@ -17,7 +17,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
 
-          echo "${{ secrets.SERVER_SSH }}"  | base64 --decode > private_key.pem
+          echo "${{ secrets.SERVER_SSH }}" > private_key.pem
           chmod 600 private_key.pem
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
 
