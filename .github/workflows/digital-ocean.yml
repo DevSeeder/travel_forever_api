@@ -13,11 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Instalação do cliente EnvKey (ajuste conforme necessário)
-      - name: Carregar variáveis de ambiente com EnvKey
-        uses: envkey/envkey-source@v1
-        with:
-          envkey: ${{ secrets.ENVKEY }}
+      - name: Instalar EnvKey CLI
+        run: |
+          curl -sL https://raw.githubusercontent.com/envkey/envkey-source/master/install.sh | bash
+          echo "EnvKey CLI instalado com sucesso."
+
+      - name: Configurar EnvKey CLI e Carregar Variáveis
+        env:
+          ENVKEY: ${{ secrets.ENVKEY }}
+        run: |
+          envkey-source > .env
+          cat .env
+          echo "Variáveis do EnvKey carregadas e salvas em .env.
 
       - name: Set up SSH
         run: |
