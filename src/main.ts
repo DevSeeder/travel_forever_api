@@ -9,7 +9,6 @@ import { AppModule } from './microservice/application/module/app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  // useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   const configService = app.get<ConfigService>(ConfigService);
 
@@ -20,3 +19,4 @@ async function bootstrap() {
   await app.listen(configService.get<string>('api.port'));
 }
 bootstrap();
+//
