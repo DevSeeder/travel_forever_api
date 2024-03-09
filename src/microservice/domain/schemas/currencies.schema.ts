@@ -11,7 +11,7 @@ export type CurrencyDocument = Currency & Document;
 })
 export class Currency extends AbstractDomain {
   @Prop({ required: true })
-  code: string;
+  code: string; //
 
   @Prop({ required: false })
   symbol: string;
