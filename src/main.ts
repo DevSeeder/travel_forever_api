@@ -19,4 +19,3 @@ async function bootstrap() {
   await app.listen(configService.get<string>('api.port'));
 }
 bootstrap();
-//
